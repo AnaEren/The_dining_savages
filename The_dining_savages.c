@@ -1,3 +1,15 @@
+/*
+Nome: Ana Ellen Deodato Pereira da Silva
+Data: 10/07/2022
+Objetivo: Solução para o problema "The dining savages"
+
+Foram usados um mutex:
+* panela: pra so um selvagem poder ter acesso à panela de cada vez (variavel global);
+e dois semáforos:
+* panela_vazia: um selvagem avisa ao cozinheiro que a panela esta vazia, que estava esperando por este sinal para cozinhar.
+* panela_cheia: o cozinheiro avisa ao selvagem que o estava esperando para poder comer que a panela está cheia.
+obs.: nao ocorre de outro selvagem ter acesso à panela enquanto o missionário cozinha, pois o unico que tem acesso à panela é o selvagem quem foi falar com o cozinheiro;
+*/
 
 #include <stdio.h>
 #include <unistd.h>
@@ -96,7 +108,7 @@ int main(){
   }
 
 
-  // inserindo as threads nos semaforos
+  // esperando o retorno das threads
 	pthread_join(t_cozinheiro, NULL);
   for(int i=0; i<QNT_SELVAGENS; i++){
 	  pthread_join(t_selvagem[i], NULL);
